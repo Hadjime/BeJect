@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace MBSCore.Beject.SceneSystem
 {
-    [AddComponentMenu("Beject/SceneSystem/Scene Manager")]
-    public class SceneManager : MonoBehaviour, ISceneManager
+    [AddComponentMenu("Beject/SceneSystem/Update Manager")]
+    public class UpdateManager : MonoBehaviour, IUpdateManager
     {
         private readonly List<IBeUpdate> UpdaterList = new List<IBeUpdate>();
         private readonly List<IBeUpdate> RemoveUpdaterList = new List<IBeUpdate>();

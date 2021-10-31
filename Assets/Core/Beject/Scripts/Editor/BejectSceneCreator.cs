@@ -10,7 +10,7 @@ namespace MBSCore.Beject.Editor
         private const BindingFlags BINDING_FLAGS = BindingFlags.NonPublic | BindingFlags.Instance;
         private const string INJECT_MANAGER_NAME = "Beject Manager";
         private const string SCENE_CONTEXT_NAME = "Scene Context";
-        private const string SCENE_MANAGER_NAME = "Scene Manager";
+        private const string UPDATE_MANAGER_NAME = "Update Manager";
         private const string SCRIPTABLE_OBJECT_CONTEXT = "scriptableObjectContext";
         private const string INJECT_MAP = "map";
         
@@ -30,7 +30,7 @@ namespace MBSCore.Beject.Editor
             return new GameObject(name).AddComponent<TObject>();
         }
         
-        [MenuItem("Tools/BeJect/Add Manager")]
+        [MenuItem("Tools/BeJect/Add Inject Manager")]
         private static void AddInjectManager()
         {
             InjectManager injectManager = CreateObject<InjectManager>(INJECT_MANAGER_NAME);
@@ -48,10 +48,10 @@ namespace MBSCore.Beject.Editor
             ReflectionSetField<SceneContext>(INJECT_MAP, sceneContext, mediator.CurrentScriptableObject);
         }
 
-        [MenuItem("Tools/BeJect/Add SceneManager")]
-        private static void AddSceneManager()
+        [MenuItem("Tools/BeJect/Add UpdateManager")]
+        private static void AddUpdateManager()
         {
-            CreateObject<SceneManager>(SCENE_MANAGER_NAME);
+            CreateObject<UpdateManager>(UPDATE_MANAGER_NAME);
         }
         
         [MenuItem("Tools/BeJect/All Modules")]
@@ -59,7 +59,7 @@ namespace MBSCore.Beject.Editor
         {
             AddInjectManager();
             AddSceneContext();
-            AddSceneManager();
+            AddUpdateManager();
         }
     }
 }

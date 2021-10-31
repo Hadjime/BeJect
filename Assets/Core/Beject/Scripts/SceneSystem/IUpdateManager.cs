@@ -1,6 +1,6 @@
 ﻿namespace MBSCore.Beject.SceneSystem
 {
-    public interface ISceneManager
+    public interface IUpdateManager
     {
         void AddUpdater(IBeUpdate updater);
         void RemoveUpdater(IBeUpdate updater);

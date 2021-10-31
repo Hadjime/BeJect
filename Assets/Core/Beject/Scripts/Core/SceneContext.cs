@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MBSCore.Inspector;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -7,8 +8,8 @@ namespace MBSCore.Beject
 	[AddComponentMenu("Beject/SceneSystem/Scene Context")]
 	public partial class SceneContext : MonoBehaviour, IContext
 	{
-		[SerializeField] private SerializedInjectCell[] injectObjects;
-		[SerializeField] private SerializedFillingCell[] fillingObjects;
+		[SerializeField, ReadOnly] private SerializedInjectCell[] injectObjects;
+		[SerializeField, ReadOnly] private SerializedFillingCell[] fillingObjects;
 
 		private void Awake()
 		{
