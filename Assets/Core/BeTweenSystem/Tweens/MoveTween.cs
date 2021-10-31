@@ -5,6 +5,7 @@ namespace MBSCore.BeTweenSystem
     public class MoveTween : Tween, IMoveTween
     {
         private Transform currentTransform;
+        private Vector3 beginPosition;
         private Vector3 targetPosition;
         private float endTweenTime = 0f;
 
@@ -29,13 +30,13 @@ namespace MBSCore.BeTweenSystem
 
             float currentTime = IsScaledTween ? Time.time : Time.unscaledTime;
             float interpolateTime = GetInterpolateTime(endTweenTime, currentTime);
-            Vector3 currentPosition = currentTransform.position;
-            currentTransform.position = Vector3.Lerp(currentPosition, targetPosition, interpolateTime);
+            currentTransform.position = Vector3.Lerp(beginPosition, targetPosition, interpolateTime);
             return IsComplete();
         }
 
         protected override void Play()
         {
+            beginPosition = currentTransform.position;
             float currentTime = IsScaledTween ? Time.time : Time.unscaledTime;
             endTweenTime = currentTime + TweenDuration;
         }
