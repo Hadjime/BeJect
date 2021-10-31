@@ -12,6 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd68c158a88e9c042b9b637d7635e59e, type: 3}
   m_Name: InjectMap
   m_EditorClassIdentifier: 
-  usingTypes: []
-  injectTypes: []
-  fillingInfos: []
+  usingTypes:
+  - serializedName: MBSCore.Beject.SceneSystem.UpdateManager, Assembly-CSharp
+  - serializedName: MBSCore.Beject.SceneSystem.IBeUpdate, Assembly-CSharp
+  injectTypes:
+  - serializedName: MBSCore.Beject.SceneSystem.IBeUpdate, Assembly-CSharp
+  fillingInfos:
+  - fillingType:
+      serializedName: MBSCore.Beject.SceneSystem.UpdateManager, Assembly-CSharp
+    fieldPaths: []
+    propertyPaths:
+    - BeUpdates

@@ -95,7 +95,7 @@ namespace MBSCore.BeTweenSystem
 
         protected float GetInterpolateTime(float endTime, float currentTime)
         {
-            float timeFactor = Mathf.Clamp01(1f - endTime - currentTime) / TweenDuration;
+            float timeFactor = Mathf.Clamp01(1f - (endTime - currentTime) / TweenDuration);
             return TweenCurve.Evaluate(timeFactor);
         }
 
