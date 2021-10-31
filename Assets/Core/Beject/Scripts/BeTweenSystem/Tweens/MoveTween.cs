@@ -10,6 +10,11 @@ namespace MBSCore.BeTweenSystem
 
         public void BeMove(Transform target, Vector3 moveTarget)
         {
+            if (CurrentState != TweenState.Waiting)
+            {
+                return;
+            }
+            
             currentTransform = target;
             targetPosition = moveTarget;
         }
@@ -33,6 +38,11 @@ namespace MBSCore.BeTweenSystem
         {
             float currentTime = IsScaledTween ? Time.time : Time.unscaledTime;
             endTweenTime = currentTime + TweenDuration;
+        }
+
+        protected override void Stop()
+        {
+            currentTransform.position = targetPosition;
         }
 
         private TweenState IsComplete()

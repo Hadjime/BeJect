@@ -17,6 +17,8 @@ namespace MBSCore.BeTweenSystem
             }
         };
 
+        public int TweenId { get; private set; }
+
         public TweenState CurrentState
         {
             get => currentState;
@@ -25,7 +27,7 @@ namespace MBSCore.BeTweenSystem
                 currentState = value;
                 if (currentState == TweenState.Complete)
                 {
-                    OnComplete?.Invoke();
+                    OnComplete?.Invoke(this);
                 }
             }
         }
@@ -34,26 +36,56 @@ namespace MBSCore.BeTweenSystem
         protected AnimationCurve TweenCurve => tweenCurve;
         protected bool IsScaledTween { get; private set; }
 
-        public event Action OnComplete;
+        public event Action<ITween> OnComplete;
+
+        public void SetTweenId(int value)
+        {
+            TweenId = value;
+        }
 
         public void SetDuration(float value)
         {
+            if (CurrentState != TweenState.Waiting)
+            {
+                return;
+            }
+            
             tweenDuration = value;
         }
 
         public void SetCurve(AnimationCurve value)
         {
+            if (CurrentState != TweenState.Waiting)
+            {
+                return;
+            }
+            
             tweenCurve = value;
         }
 
         public void Play(IBeTweenManager beTweenManager, int tweenId)
         {
-            if (beTweenManager.NeedPlay(tweenId))
+            if (beTweenManager.NeedPlay(tweenId) == false)
             {
-                CurrentState = TweenState.Processing;
-                IsScaledTween = beTweenManager.IsScaledTween(tweenId);
-                Play();
+                return;
             }
+
+            TweenId = tweenId;
+            CurrentState = TweenState.Processing;
+            IsScaledTween = beTweenManager.IsScaledTween(TweenId);
+            Play();
+        }
+
+        public void Stop(IBeTweenManager beTweenManager, int tweenId)
+        {
+            if (TweenId != tweenId ||
+                beTweenManager.NeedStop(tweenId) == false)
+            {
+                return;
+            }
+
+            Stop();
+            CurrentState = TweenState.Complete;
         }
 
         public virtual TweenState TweenProcessing()
@@ -68,5 +100,6 @@ namespace MBSCore.BeTweenSystem
         }
 
         protected abstract void Play();
+        protected abstract void Stop();
     }
 }
