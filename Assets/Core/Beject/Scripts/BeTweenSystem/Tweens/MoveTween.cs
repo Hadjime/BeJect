@@ -38,8 +38,8 @@ namespace MBSCore.BeTweenSystem
         private TweenState IsComplete()
         {
             Vector3 currentPosition = currentTransform.position;
-            Vector3 heading = targetPosition - currentPosition;
-            CurrentState = Mathf.Approximately(heading.sqrMagnitude, 0f) ?
+            Vector3 direction = targetPosition - currentPosition;
+            CurrentState = Mathf.Approximately(direction.sqrMagnitude, 0f) ?
                 TweenState.Complete :
                 TweenState.Processing;
             return CurrentState;
