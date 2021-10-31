@@ -186,7 +186,7 @@ namespace MBSCore.Beject
 
 		private static void FoundFields(Type type, List<FieldInfo> fieldsList)
 		{
-			FieldInfo[] fields = type.GetFields(InjectUtility.FoundBindingFlags);
+			FieldInfo[] fields = type.GetFields(InjectUtility.FOUND_BINDING_FLAGS);
 			for (int j = 0; j < fields.Length; j++)
 			{
 				FieldInfo field = fields[j];
@@ -206,7 +206,7 @@ namespace MBSCore.Beject
 
 		private static void FoundProperties(Type type, List<PropertyInfo> propertyList)
 		{
-			PropertyInfo[] properties = type.GetProperties(InjectUtility.FoundBindingFlags);
+			PropertyInfo[] properties = type.GetProperties(InjectUtility.FOUND_BINDING_FLAGS);
 			for (int j = 0; j < properties.Length; j++)
 			{
 				PropertyInfo propertyInfo = properties[j];

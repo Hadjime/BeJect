@@ -6,10 +6,9 @@ namespace MBSCore.Beject
 {
 	internal static class InjectUtility
 	{
-		public const BindingFlags FoundBindingFlags =
+		public const BindingFlags FOUND_BINDING_FLAGS =
 			BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
-
-
+		
 		private static readonly InjectModule[] Modules =
 		{
 			new InjectModuleArray(),

@@ -9,16 +9,17 @@ namespace MBSCore.Editor
 {
     public class ScriptableObjectCreator : CustomEditorWindow
     {
+        private const BindingFlags STATIC_BINDING_FLAGS = BindingFlags.Static | BindingFlags.NonPublic;
+        private const string METHOD_GET_ACTIVE_PATH = "TryGetActiveFolderPath";
         private const string ENTER_MANAGER_NAME_LABEL = "Enter Manager Name:";
         private const string WIZARD_TITLE = "Scriptable Object Creator";
         private const string CREATE_BUTTON_NAME = "Create";
         private const string ASSET_EXPANSION = ".asset";
         private const int SEARCH_COUNT = 20;
         private const int MAX_VALIDATE_NAME_COUNT = 100;
-        
-        private static readonly MethodInfo GetActiveFolderPathMethod = typeof(ProjectWindowUtil).GetMethod(
-            "TryGetActiveFolderPath", BindingFlags.Static | BindingFlags.NonPublic);
 
+        private static readonly MethodInfo GetActiveFolderPathMethod =
+            typeof(ProjectWindowUtil).GetMethod(METHOD_GET_ACTIVE_PATH, STATIC_BINDING_FLAGS);
         private static readonly object[] GetActiveFolderPathMethodArguments = {null};
 
         private static GUIStyle BoldStile => EditorStyles.boldLabel;
@@ -27,11 +28,13 @@ namespace MBSCore.Editor
         
         private Type[] foundTypes = null;
         private Type createType;
+        private Type selectedType;
         
         protected override void DrawGUI()
         {
             DrawHorizontalBox(DrawSearchPanel);
             DrawVerticalBox(TryDrawTypes);
+            DrawButton(CREATE_BUTTON_NAME, CreateScriptableObject);
         }
 
         [MenuItem("Tools/ScriptableObject/Creator")]
@@ -165,14 +168,18 @@ namespace MBSCore.Editor
 
         private void CreateScriptableObject()
         {
-            CreateType(createType);
+            CreateType(selectedType);
         }
 
         private void DrawCreatesType()
         {
-            DrawButton(CREATE_BUTTON_NAME, CreateScriptableObject);
-            GUILayout.Label(createType.Namespace + ".", GUILayout.ExpandWidth(false));
-            GUILayout.Label(createType.Name, BoldStile, GUILayout.ExpandWidth(false));
+            string lable = createType.Namespace + "." + createType.Name;
+            DrawButton(lable, SelectTypeCallback);
+        }
+
+        private void SelectTypeCallback()
+        {
+            selectedType = createType;
         }
 
         private void OnEnable()

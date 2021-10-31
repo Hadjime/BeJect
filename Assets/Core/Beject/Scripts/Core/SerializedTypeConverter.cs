@@ -28,7 +28,7 @@ namespace MBSCore.Beject
 				Type processingType = type;
 				while (processingType != null && fieldInfo == null)
 				{
-					fieldInfo = processingType.GetField(fieldPaths[i], InjectUtility.FoundBindingFlags);
+					fieldInfo = processingType.GetField(fieldPaths[i], InjectUtility.FOUND_BINDING_FLAGS);
 					processingType = processingType.BaseType;
 				}
 
@@ -49,7 +49,7 @@ namespace MBSCore.Beject
 
 				while (processingType != null && propertyInfo == null)
 				{
-					propertyInfo = processingType.GetProperty(propertyPaths[i], InjectUtility.FoundBindingFlags);
+					propertyInfo = processingType.GetProperty(propertyPaths[i], InjectUtility.FOUND_BINDING_FLAGS);
 					processingType = processingType.BaseType;
 				}
 

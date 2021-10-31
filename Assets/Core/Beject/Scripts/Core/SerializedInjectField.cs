@@ -18,7 +18,7 @@ namespace MBSCore.Beject
 
         public FieldInfo GetFieldInfo()
         {
-            return _type.Type.GetField(_path, InjectUtility.FoundBindingFlags);
+            return _type.Type.GetField(_path, InjectUtility.FOUND_BINDING_FLAGS);
         }
     }
 }

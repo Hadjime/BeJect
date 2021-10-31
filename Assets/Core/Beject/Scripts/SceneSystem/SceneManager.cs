@@ -98,7 +98,6 @@ namespace MBSCore.Beject.SceneSystem
             }
 
             UpdateHandler();
-            RemoveUpdateHandler();
         }
         
         private void FixedUpdate()
@@ -109,7 +108,6 @@ namespace MBSCore.Beject.SceneSystem
             }
 
             FixUpdateHandler();
-            RemoveUpdateHandler();
         }
         
         private void LateUpdate()

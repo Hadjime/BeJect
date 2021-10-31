@@ -12,15 +12,33 @@ namespace MBSCore.Beject
 		[SerializeField] private ScriptableObjectContext scriptableObjectContext;
 		
 		private readonly Dictionary<Type, List<object>> injectDictionary = new Dictionary<Type, List<object>>();
-
 		private readonly Dictionary<object, InjectMembersContainer> fillingDictionary =
 			new Dictionary<object, InjectMembersContainer>();
 
+		private static InjectManager instance;
+
+		private bool HasOtherInstance()
+		{
+			if (ReferenceEquals(instance, null) == false)
+			{
+				Destroy(gameObject);
+				return true;
+			}
+
+			instance = this;
+			DontDestroyOnLoad(gameObject);
+			return false;
+		}
+		
 		private void Awake()
 		{
+			if (HasOtherInstance())
+			{
+				return;
+			}
+			
 			ContextHandler.AddHandler += ContextAddHandler;
 			ContextHandler.RemoveHandler += ContextRemoveHandler;
-
 			IEnumerable<IContext> contextEnumerable = ContextHandler.GetCurrentContexts();
 			foreach (IContext context in contextEnumerable)
 			{

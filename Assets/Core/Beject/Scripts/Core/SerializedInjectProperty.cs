@@ -18,7 +18,7 @@ namespace MBSCore.Beject
 
         public PropertyInfo GetPropertyInfo()
         {
-            return _type.Type.GetProperty(_path, InjectUtility.FoundBindingFlags);
+            return _type.Type.GetProperty(_path, InjectUtility.FOUND_BINDING_FLAGS);
         }
     }
 }
