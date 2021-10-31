@@ -29,6 +29,16 @@ namespace MBSCore.BeTweenSystem
             throw new System.NotImplementedException();
         }
 
+        public bool NeedPlay(int tweenId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool IsScaledTween(int tweenId)
+        {
+            throw new System.NotImplementedException();
+        }
+
         private int CalculateTweenId()
         {
             return -1;
